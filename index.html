@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BIAXAL | Productos de Limpieza y Jarcería</title>
+
+<meta name="description" content="BIAXAL Productos de Limpieza y Jarcería. Somos fabricantes. Compra en línea y recibe a domicilio.">
+
+<link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json">
+
+<link rel="icon" type="image/png" href="assets-logo-biaxal.png">
+</head>
+
+<body>
+
+<header class="hero">
+
+<div class="hero-overlay">
+
+<img
+src="assets-logo-biaxal.png"
+alt="BIAXAL"
+class="logo-principal"
+
+>
+
+<h1>BIAXAL</h1>
+
+<h2>PRODUCTOS DE LIMPIEZA Y JARCERÍA</h2>
+
+<p class="fabricantes">
+SOMOS FABRICANTES
+</p>
+
+<div class="beneficios">
+
+<div>🚚 ENTREGA GRATIS DESDE $50</div>
+
+<div>🏭 VENTA DIRECTA DE FÁBRICA</div>
+
+<div>💲 PRECIOS ESPECIALES POR VOLUMEN</div>
+
+</div>
+
+<div class="hero-botones">
+
+<a href="#productos" class="btn-principal">
+VER PRODUCTOS
+</a>
+
+<a href="#distribuidores" class="btn-secundario">
+QUIERO SER DISTRIBUIDOR
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+<nav class="menu-principal">
+
+<a href="#">Inicio</a>
+
+<a href="#productos">
+Productos
+</a>
+
+<a href="#ofertas">
+Ofertas
+</a>
+
+<a href="#distribuidores">
+Distribuidores
+</a>
+
+<a href="#entregas">
+Entregas
+</a>
+
+<a href="#contacto">
+Contacto
+</a>
+
+</nav>
+
+<section class="busqueda">
+
+<input
+type="text"
+id="buscarProducto"
+placeholder="🔍 Buscar productos..."
+
+>
+
+</section>
+
+<section id="categorias" class="categorias">
+
+<h2>CATEGORÍAS</h2>
+
+<div id="contenedorLineas">
+
+<!-- APP.JS CARGARÁ LAS LÍNEAS -->
+
+</div>
+
+</section>
+
+<section id="ofertas" class="ofertas">
+
+<h2>🔥 OFERTAS DESTACADAS</h2>
+
+<div id="contenedorOfertas">
+
+<!-- APP.JS -->
+
+</div>
+
+</section>
+
+<section id="destacados" class="destacados">
+
+<h2>⭐ PRODUCTOS DESTACADOS</h2>
+
+<div id="contenedorDestacados">
+
+<!-- APP.JS -->
+
+</div>
+
+</section>
+
+<section id="productos" class="productos">
+
+<h2>🧴 CATÁLOGO DE PRODUCTOS</h2>
+
+<div id="contenedorProductos">
+
+<!-- APP.JS -->
+
+</div>
+
+</section>
+
+<section id="distribuidores" class="distribuidores">
+
+<h2>
+🤝 ¿QUIERES GANAR DINERO VENDIENDO PRODUCTOS BIAXAL?
+</h2>
+
+<p>
+Conviértete en distribuidor o revendedor.
+</p>
+
+<form id="formDistribuidor">
+
+<input
+type="text"
+id="distNombre"
+placeholder="Nombre"
+required
+
+>
+
+<input
+type="tel"
+id="distTelefono"
+placeholder="Teléfono"
+required
+
+>
+
+<input
+type="text"
+id="distZona"
+placeholder="Colonia o Zona"
+required
+
+>
+
+<button type="submit">
+QUIERO SER DISTRIBUIDOR
+</button>
+
+</form>
+
+</section>
+
+<section id="carrito" class="carrito">
+
+<h2>🛒 CARRITO DE COMPRAS</h2>
+
+<div id="listaCarrito">
+
+Tu carrito está vacío.
+
+</div>
+
+<div class="totales">
+
+<p>
+Subtotal:
+<span id="subtotal">
+$0
+</span>
+</p>
+
+<p>
+Envío:
+<span id="envio">
+$0
+</span>
+</p>
+
+<p class="total-final">
+Total:
+<span id="total">
+$0
+</span>
+</p>
+
+</div>
+
+</section>
+
+<section id="pedido" class="pedido">
+
+<h2>📦 FINALIZAR PEDIDO</h2>
+
+<form id="formPedido">
+
+<input
+type="text"
+id="clienteNombre"
+placeholder="Nombre completo"
+required
+
+>
+
+<input
+type="tel"
+id="clienteTelefono"
+placeholder="Teléfono"
+required
+
+>
+
+<textarea
+id="clienteDireccion"
+placeholder="Dirección completa"
+required
+></textarea>
+
+<button
+type="button"
+id="btnGPS"
+
+>
+
+📍 Compartir Ubicación </button>
+
+<input
+type="hidden"
+id="gps"
+
+>
+
+<select id="formaPago">
+
+<option value="Efectivo">
+Efectivo
+</option>
+
+<option value="Transferencia">
+Transferencia
+</option>
+
+</select>
+
+<button type="submit">
+ENVIAR PEDIDO
+</button>
+
+</form>
+
+</section>
+
+<section id="entregas" class="entregas">
+
+<h2>🚚 ENTREGAS</h2>
+
+<ul>
+
+<li>
+Pedidos las 24 horas.
+</li>
+
+<li>
+Entrega normal después de las 2 PM.
+</li>
+
+<li>
+Pedidos de distribuidor máximo 2 días.
+</li>
+
+<li>
+Cobertura actual: Milpa Alta.
+</li>
+
+</ul>
+
+</section>
+
+<footer id="contacto">
+
+<h3>BIAXAL</h3>
+
+<p>
+PRODUCTOS DE LIMPIEZA Y JARCERÍA
+</p>
+
+<p>
+SOMOS FABRICANTES
+</p>
+
+</footer>
+
+<div id="donYuca">
+
+<img
+src="activos-don-yuca.png"
+alt="Don Yuca"
+
+>
+
+<div id="mensajeDonYuca">
+
+Hola, soy Don Yuca 👋
+
+</div>
+
+</div>
+
+<a
+href="https://wa.me/525514020332"
+target="_blank"
+id="whatsappFlotante"
+
+>
+
+💬 </a>
+
+<script src="app.js"></script>
+
+</body>
+</html>
