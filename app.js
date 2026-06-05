@@ -14,8 +14,13 @@ document.addEventListener(
 async function iniciar() {
 
   await cargarLineas();
+
   await cargarProductos();
+
+  await cargarDestacados();
+
   await cargarOfertas();
+
   await cargarDonYuca();
 
 }
@@ -45,6 +50,26 @@ async function cargarLineas() {
 
   contenedor.innerHTML = "";
 
+const todos =
+  document.createElement(
+    "button"
+  );
+
+todos.textContent =
+  "TODOS";
+
+todos.className =
+  "btn-linea";
+
+todos.addEventListener(
+  "click",
+  cargarProductos
+);
+
+contenedor.appendChild(
+  todos
+);
+
   lineas.slice(1).forEach(
     linea => {
 
@@ -58,6 +83,17 @@ async function cargarLineas() {
 
       boton.className =
         "btn-linea";
+      
+      boton.addEventListener(
+  "click",
+  () => {
+
+    filtrarLinea(
+      linea[1]
+    );
+
+  }
+);
 
       contenedor.appendChild(
         boton
@@ -90,34 +126,10 @@ async function cargarProductos() {
         .toUpperCase() !== "SI"
       ) return;
 
-      const card =
-        document.createElement(
-          "div"
-        );
-
-      card.className =
-        "producto-card";
-
-      card.innerHTML = `
-        <img src="${producto[9]}" alt="${producto[3]}">
-
-        <h3>${producto[3]}</h3>
-
-        <p>${producto[4]}</p>
-
-        <p>
-          Desde $${producto[6]}
-        </p>
-
-        <button>
-          Ver producto
-        </button>
-      `;
-
-      contenedor.appendChild(
-        card
-      );
-
+      crearTarjetaProducto(
+  producto,
+  contenedor
+);
     }
   );
 
@@ -181,3 +193,373 @@ async function cargarDonYuca() {
   }
 
 }
+
+/*
+=================================
+BUSCADOR
+=================================
+*/
+
+document.addEventListener(
+  "input",
+  function(e){
+
+    if(
+      e.target.id !==
+      "buscarProducto"
+    ) return;
+
+    const texto =
+      e.target.value
+      .toLowerCase();
+
+    filtrarProductos(
+      texto
+    );
+
+  }
+);
+
+function filtrarProductos(texto){
+
+  const contenedor =
+    document.getElementById(
+      "contenedorProductos"
+    );
+
+  contenedor.innerHTML = "";
+
+  productos
+    .slice(1)
+    .forEach(producto => {
+
+      if(
+        String(producto[10])
+        .toUpperCase() !== "SI"
+      ) return;
+
+      const nombre =
+        String(producto[3])
+        .toLowerCase();
+
+      const descripcion =
+        String(producto[4])
+        .toLowerCase();
+
+      if(
+        !nombre.includes(texto) &&
+        !descripcion.includes(texto)
+      ){
+        return;
+      }
+
+      crearTarjetaProducto(
+        producto,
+        contenedor
+      );
+
+    });
+
+}
+
+/*
+=================================
+TARJETA PRODUCTO
+=================================
+*/
+
+function crearTarjetaProducto(
+  producto,
+  contenedor
+){
+
+  const card =
+    document.createElement(
+      "div"
+    );
+
+  card.className =
+    "producto-card";
+
+  card.innerHTML = `
+    <img
+      src="${producto[9]}"
+      alt="${producto[3]}"
+    >
+
+    <h3>
+      ${producto[3]}
+    </h3>
+
+    <p>
+      ${producto[4]}
+    </p>
+
+    <p>
+      Desde $${producto[6]}
+    </p>
+
+   <button
+  onclick="agregarAlCarrito('${producto[0]}')"
+>
+  AGREGAR AL CARRITO
+</button>
+  `;
+
+  contenedor.appendChild(
+    card
+  );
+
+}
+
+/*
+=================================
+CARRITO BIAXAL
+=================================
+*/
+
+let carrito = [];
+
+function obtenerPrecioProducto(
+  producto,
+  cantidad
+){
+
+  if(cantidad >= 20){
+    return Number(producto[8]);
+  }
+
+  if(cantidad >= 6){
+    return Number(producto[7]);
+  }
+
+  return Number(producto[6]);
+
+}
+
+function agregarAlCarrito(
+  productoId
+){
+
+  const producto =
+    productos.find(
+      p => p[0] === productoId
+    );
+
+  if(!producto){
+    return;
+  }
+
+  let cantidad = 1;
+
+  if(
+    String(producto[5])
+    .toUpperCase()
+    === "L"
+    ||
+    String(producto[5])
+    .toUpperCase()
+    === "KG"
+  ){
+    cantidad = 0.5;
+  }
+
+  const precio =
+    obtenerPrecioProducto(
+      producto,
+      cantidad
+    );
+
+  const existente =
+    carrito.find(
+      item =>
+      item.id === productoId
+    );
+
+  if(existente){
+
+    existente.cantidad +=
+      cantidad;
+
+    existente.subtotal =
+      existente.cantidad *
+      obtenerPrecioProducto(
+        producto,
+        existente.cantidad
+      );
+
+  }else{
+
+    carrito.push({
+
+      id: producto[0],
+
+      nombre: producto[3],
+
+      unidad: producto[5],
+
+      cantidad: cantidad,
+
+      precio: precio,
+
+      subtotal:
+        cantidad * precio
+
+    });
+
+  }
+
+  actualizarCarrito();
+
+}
+
+function actualizarCarrito(){
+
+  const lista =
+    document.getElementById(
+      "listaCarrito"
+    );
+
+  const subtotalHTML =
+    document.getElementById(
+      "subtotal"
+    );
+
+  const envioHTML =
+    document.getElementById(
+      "envio"
+    );
+
+  const totalHTML =
+    document.getElementById(
+      "total"
+    );
+
+  lista.innerHTML = "";
+
+  let subtotal = 0;
+
+  carrito.forEach(item => {
+
+    subtotal +=
+      item.subtotal;
+
+    const div =
+      document.createElement(
+        "div"
+      );
+
+    div.innerHTML = `
+      ${item.nombre}
+      -
+      ${item.cantidad}
+      ${item.unidad}
+      -
+      $${item.subtotal.toFixed(2)}
+    `;
+
+    lista.appendChild(div);
+
+  });
+
+  let envio = 30;
+
+  if(subtotal >= 50){
+    envio = 0;
+  }
+
+  const total =
+    subtotal + envio;
+
+  subtotalHTML.textContent =
+    "$" +
+    subtotal.toFixed(2);
+
+  envioHTML.textContent =
+    "$" +
+    envio.toFixed(2);
+
+  totalHTML.textContent =
+    "$" +
+    total.toFixed(2);
+
+}
+
+/*
+=================================
+FILTRO POR LINEA
+=================================
+*/
+
+function filtrarLinea(
+  nombreLinea
+){
+
+  const contenedor =
+    document.getElementById(
+      "contenedorProductos"
+    );
+
+  contenedor.innerHTML = "";
+
+  productos
+    .slice(1)
+    .forEach(producto => {
+
+      if(
+        String(producto[10])
+        .toUpperCase() !== "SI"
+      ) return;
+
+      if(
+        producto[1] !==
+        nombreLinea
+      ) return;
+
+      crearTarjetaProducto(
+        producto,
+        contenedor
+      );
+
+    });
+
+}
+
+/*
+=================================
+PRODUCTOS DESTACADOS
+=================================
+*/
+
+async function cargarDestacados(){
+
+  const contenedor =
+    document.getElementById(
+      "contenedorDestacados"
+    );
+
+  contenedor.innerHTML = "";
+
+  productos
+    .slice(1)
+    .forEach(producto => {
+
+      if(
+        String(producto[10])
+        .toUpperCase() !== "SI"
+      ) return;
+
+      if(
+        String(producto[11])
+        .toUpperCase() !== "SI"
+      ) return;
+
+      crearTarjetaProducto(
+        producto,
+        contenedor
+      );
+
+    });
+
+}
+
