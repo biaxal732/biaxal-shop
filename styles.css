@@ -1,0 +1,436 @@
+/* ==========================
+BIAXAL SHOP
+styles.css
+========================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#f7f9fb;
+color:#222;
+}
+
+/* ==========================
+HERO
+========================== */
+
+.hero{
+background:linear-gradient(135deg,#003D99,#00C9A7);
+color:white;
+text-align:center;
+padding:40px 20px;
+}
+
+.logo-principal{
+
+  width: 180px;
+
+  max-width: 80%;
+
+  height: auto;
+
+  display: block;
+
+  margin: 0 auto 15px;
+
+}
+
+.hero h1{
+
+  font-size: 2.4rem;
+
+  margin-bottom: 5px;
+
+}
+
+.hero h2{
+
+  font-size: 1.1rem;
+
+  margin-bottom: 10px;
+
+}
+
+.fabricantes{
+
+  font-size: 1rem;
+
+  font-weight: bold;
+
+}
+
+.beneficios{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:15px;
+margin-bottom:25px;
+}
+
+.beneficios div{
+background:white;
+color:#003D99;
+padding:10px 15px;
+border-radius:12px;
+font-weight:bold;
+}
+
+.hero-botones{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn-principal,
+.btn-secundario{
+text-decoration:none;
+padding:12px 20px;
+border-radius:10px;
+font-weight:bold;
+transition:.3s;
+}
+
+.btn-principal{
+background:white;
+color:#003D99;
+}
+
+.btn-principal:hover{
+transform:scale(1.05);
+}
+
+.btn-secundario{
+background:#003D99;
+color:white;
+}
+
+.btn-secundario:hover{
+transform:scale(1.05);
+}
+
+/* ==========================
+MENÚ
+========================== */
+
+.menu-principal{
+background:white;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+padding:15px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+position:sticky;
+top:0;
+z-index:999;
+}
+
+.menu-principal a{
+text-decoration:none;
+color:#003D99;
+font-weight:bold;
+}
+
+/* ==========================
+BUSCADOR
+========================== */
+
+.busqueda{
+padding:30px 15px;
+text-align:center;
+}
+
+.busqueda input{
+width:100%;
+max-width:700px;
+padding:15px;
+border-radius:12px;
+border:1px solid #ddd;
+font-size:16px;
+}
+
+/* ==========================
+SECCIONES
+========================== */
+
+section{
+padding:40px 20px;
+}
+
+section h2{
+text-align:center;
+margin-bottom:30px;
+color:#003D99;
+}
+
+/* ==========================
+CATEGORIAS
+========================== */
+
+#contenedorLineas{
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+justify-content:center;
+}
+
+.linea-card{
+background:white;
+padding:15px 20px;
+border-radius:12px;
+box-shadow:0 3px 12px rgba(0,0,0,.08);
+cursor:pointer;
+transition:.3s;
+}
+
+.linea-card:hover{
+transform:translateY(-3px);
+}
+
+/* ==========================
+PRODUCTOS
+========================== */
+
+#contenedorProductos,
+#contenedorDestacados,
+#contenedorOfertas{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+gap:20px;
+}
+
+.producto{
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.producto:hover{
+transform:translateY(-5px);
+}
+
+.producto img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.producto-info{
+padding:15px;
+}
+
+.producto-info h3{
+margin-bottom:10px;
+color:#003D99;
+}
+
+.producto-info p{
+margin-bottom:10px;
+}
+
+.precio{
+color:#00A884;
+font-size:1.2rem;
+font-weight:bold;
+}
+
+.agotado{
+background:#dc3545;
+color:white;
+padding:8px;
+text-align:center;
+font-weight:bold;
+}
+
+.btn-agregar{
+width:100%;
+border:none;
+background:#00C9A7;
+color:white;
+padding:12px;
+cursor:pointer;
+font-weight:bold;
+margin-top:10px;
+}
+
+.btn-agregar:hover
+
+/* ==========================
+DISTRIBUIDORES
+========================== */
+
+#formDistribuidor{
+max-width:600px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+#formDistribuidor input,
+#formDistribuidor button{
+padding:15px;
+border-radius:10px;
+}
+
+#formDistribuidor button{
+border:none;
+background:#003D99;
+color:white;
+font-weight:bold;
+}
+
+/* ==========================
+CARRITO
+========================== */
+
+.carrito{
+background:white;
+}
+
+#listaCarrito{
+max-width:800px;
+margin:auto;
+min-height:100px;
+}
+
+.totales{
+max-width:800px;
+margin:20px auto;
+font-size:18px;
+}
+
+.total-final{
+font-size:24px;
+font-weight:bold;
+color:#003D99;
+}
+
+/* ==========================
+PEDIDO
+========================== */
+
+#formPedido{
+max-width:700px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+#formPedido input,
+#formPedido textarea,
+#formPedido select,
+#formPedido button{
+padding:15px;
+border-radius:10px;
+border:1px solid #ddd;
+}
+
+#formPedido button{
+background:#00C9A7;
+color:white;
+border:none;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* ==========================
+DON YUCA
+========================== */
+
+#donYuca{
+position:fixed;
+bottom:90px;
+left:20px;
+width:280px;
+background:white;
+border-radius:20px;
+box-shadow:0 4px 20px rgba(0,0,0,.15);
+overflow:hidden;
+z-index:1000;
+}
+
+#donYuca img{
+
+  width: 80px;
+
+  height: auto;
+
+  display: block;
+
+  margin: 0 auto 10px;
+
+}
+
+#mensajeDonYuca{
+padding:15px;
+font-size:14px;
+}
+
+/* ==========================
+WHATSAPP
+========================== */
+
+#whatsappFlotante{
+position:fixed;
+right:20px;
+bottom:20px;
+width:65px;
+height:65px;
+border-radius:50%;
+background:#25D366;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+text-decoration:none;
+font-size:30px;
+box-shadow:0 4px 15px rgba(0,0,0,.25);
+z-index:9999;
+}
+
+/* ==========================
+FOOTER
+========================== */
+
+footer{
+background:#003D99;
+color:white;
+text-align:center;
+padding:40px 20px;
+}
+
+/* ==========================
+RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+```
+.hero h1{
+    font-size:2.2rem;
+}
+
+.hero h2{
+    font-size:1.1rem;
+}
+
+#donYuca{
+    width:220px;
+}
+```
+
+}
