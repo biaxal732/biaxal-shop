@@ -196,22 +196,22 @@ async function cargarDonYuca() {
 
 /*
 =================================
-BUSCADOR
+ACTIVAR BUSCADOR
 =================================
 */
 
-document.addEventListener(
-  "input",
-  function(e){
-
-    if(
-      e.target.id !==
-      "buscarProducto"
-    ) return;
+document
+.getElementById(
+  "buscarProducto"
+)
+.addEventListener(
+  "keyup",
+  function(){
 
     const texto =
-      e.target.value
-      .toLowerCase();
+      this.value
+      .toUpperCase()
+      .trim();
 
     filtrarProductos(
       texto
@@ -220,7 +220,9 @@ document.addEventListener(
   }
 );
 
-function filtrarProductos(texto){
+function filtrarProductos(
+  texto
+){
 
   const contenedor =
     document.getElementById(
@@ -235,28 +237,30 @@ function filtrarProductos(texto){
 
       if(
         String(producto[10])
-        .toUpperCase() !== "SI"
+        .toUpperCase()
+        !== "SI"
       ) return;
 
       const nombre =
         String(producto[3])
-        .toLowerCase();
+        .toUpperCase();
 
       const descripcion =
         String(producto[4])
-        .toLowerCase();
+        .toUpperCase();
 
       if(
-        !nombre.includes(texto) &&
-        !descripcion.includes(texto)
+        nombre.includes(texto)
+        ||
+        descripcion.includes(texto)
       ){
-        return;
-      }
 
-      crearTarjetaProducto(
-        producto,
-        contenedor
-      );
+        crearTarjetaProducto(
+          producto,
+          contenedor
+        );
+
+      }
 
     });
 
@@ -562,4 +566,33 @@ async function cargarDestacados(){
     });
 
 }
+
+/*
+=================================
+MINIMIZAR DON YUCA
+=================================
+*/
+
+document.addEventListener(
+  "click",
+  function(e){
+
+    if(
+      e.target.id ===
+      "btnMinimizarDonYuca"
+    ){
+
+      document
+      .getElementById(
+        "donYuca"
+      )
+      .classList
+      .toggle(
+        "donYucaMinimizado"
+      );
+
+    }
+
+  }
+);
 

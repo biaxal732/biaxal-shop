@@ -354,7 +354,7 @@ DON YUCA
 #donYuca{
 position:fixed;
 bottom:90px;
-left:20px;
+right:100px;
 width:280px;
 background:white;
 border-radius:20px;
@@ -434,3 +434,56 @@ RESPONSIVE
 ```
 
 }
+
+#btnMinimizarDonYuca{
+
+position:absolute;
+
+top:5px;
+
+right:5px;
+
+width:25px;
+
+height:25px;
+
+border:none;
+
+border-radius:50%;
+
+background:#003D99;
+
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+
+z-index:1001;
+
+}
+
+.donYucaMinimizado{
+
+width:70px !important;
+
+height:70px !important;
+
+overflow:hidden;
+
+}
+
+.donYucaMinimizado #mensajeDonYuca{
+
+display:none;
+
+}
+
+.donYucaMinimizado img{
+
+width:60px !important;
+
+margin-top:5px;
+
+}
+
