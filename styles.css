@@ -354,7 +354,7 @@ DON YUCA
 #donYuca{
 position:fixed;
 bottom:90px;
-right:100px;
+left:20px;
 width:280px;
 background:white;
 border-radius:20px;
