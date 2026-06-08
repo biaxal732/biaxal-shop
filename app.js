@@ -23,6 +23,8 @@ async function iniciar() {
 
   await cargarDonYuca();
 
+  activarBuscador();
+
 }
 
 async function obtenerDatos(accion) {
@@ -194,32 +196,6 @@ async function cargarDonYuca() {
 
 }
 
-/*
-=================================
-ACTIVAR BUSCADOR
-=================================
-*/
-
-document
-.getElementById(
-  "buscarProducto"
-)
-.addEventListener(
-  "keyup",
-  function(){
-
-    const texto =
-      this.value
-      .toUpperCase()
-      .trim();
-
-    filtrarProductos(
-      texto
-    );
-
-  }
-);
-
 function filtrarProductos(
   texto
 ){
@@ -246,25 +222,35 @@ function filtrarProductos(
         .toUpperCase();
 
       const descripcion =
-        String(producto[4])
-        .toUpperCase();
+  String(producto[4])
+  .toUpperCase();
 
-      if(
-        nombre.includes(texto)
-        ||
-        descripcion.includes(texto)
-      ){
+const linea =
+  String(producto[1])
+  .toUpperCase();
 
-        crearTarjetaProducto(
-          producto,
-          contenedor
-        );
+const subcategoria =
+  String(producto[2])
+  .toUpperCase();
 
-      }
+     if(
+  nombre.includes(texto)
+  ||
+  descripcion.includes(texto)
+  ||
+  linea.includes(texto)
+  ||
+  subcategoria.includes(texto)
+){
 
-    });
+  crearTarjetaProducto(
+    producto,
+    contenedor
+  );
 
 }
+
+});
 
 /*
 =================================
@@ -516,10 +502,11 @@ function filtrarLinea(
       ) return;
 
       if(
-        producto[1] !==
-        nombreLinea
-      ) return;
-
+  String(producto[1]).trim().toUpperCase()
+  !==
+  String(nombreLinea).trim().toUpperCase()
+) return;
+        
       crearTarjetaProducto(
         producto,
         contenedor
@@ -536,6 +523,10 @@ PRODUCTOS DESTACADOS
 */
 
 async function cargarDestacados(){
+
+  if(!productos.length){
+  return;
+}
 
   const contenedor =
     document.getElementById(
@@ -596,3 +587,35 @@ document.addEventListener(
   }
 );
 
+/*
+=================================
+BUSCADOR
+=================================
+*/
+
+function activarBuscador(){
+
+  const buscador =
+    document.getElementById(
+      "buscarProducto"
+    );
+
+  if(!buscador) return;
+
+  buscador.addEventListener(
+    "keyup",
+    function(){
+
+      const texto =
+        this.value
+        .toUpperCase()
+        .trim();
+
+      filtrarProductos(
+        texto
+      );
+
+    }
+  );
+
+}
