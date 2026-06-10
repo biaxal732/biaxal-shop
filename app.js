@@ -252,6 +252,9 @@ const subcategoria =
 
 });
 
+    }
+    
+
 /*
 =================================
 TARJETA PRODUCTO
@@ -506,7 +509,7 @@ function filtrarLinea(
   !==
   String(nombreLinea).trim().toUpperCase()
 ) return;
-        
+
       crearTarjetaProducto(
         producto,
         contenedor
