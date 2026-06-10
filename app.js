@@ -253,7 +253,7 @@ const subcategoria =
 });
 
     }
-    
+
 
 /*
 =================================
@@ -276,9 +276,10 @@ function crearTarjetaProducto(
 
   card.innerHTML = `
     <img
-      src="${producto[9]}"
-      alt="${producto[3]}"
-    >
+  src="${producto[9]}"
+  alt="${producto[3]}"
+  onclick="verImagen('${producto[9]}')"
+>
 
     <h3>
       ${producto[3]}
@@ -622,3 +623,44 @@ function activarBuscador(){
   );
 
 }
+
+/*
+=================================
+VER IMAGEN GRANDE
+=================================
+*/
+
+function verImagen(url){
+
+  document
+    .getElementById(
+      "imagenGrande"
+    )
+    .src = url;
+
+  document
+    .getElementById(
+      "modalImagen"
+    )
+    .style.display =
+    "flex";
+
+}
+
+document
+  .getElementById(
+    "cerrarModal"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      document
+        .getElementById(
+          "modalImagen"
+        )
+        .style.display =
+        "none";
+
+    }
+  );
