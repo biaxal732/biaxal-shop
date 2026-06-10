@@ -487,3 +487,46 @@ margin-top:5px;
 
 }
 
+/* ==========================
+TARJETAS PRODUCTOS
+========================== */
+
+.producto-card{
+background:white;
+border-radius:15px;
+padding:10px;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+overflow:hidden;
+}
+
+.producto-card img{
+width:100%;
+height:100px;
+object-fit:contain;
+display:block;
+margin:auto;
+}
+
+.producto-card h3{
+font-size:16px;
+margin-top:10px;
+color:#003D99;
+}
+
+.producto-card p{
+font-size:14px;
+margin-top:5px;
+}
+
+.producto-card button{
+width:100%;
+margin-top:10px;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#00C9A7;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
