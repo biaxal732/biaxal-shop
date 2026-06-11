@@ -477,6 +477,36 @@ function actualizarCarrito(){
     "$" +
     total.toFixed(2);
 
+   let htmlMini = "";
+
+carrito.forEach(item=>{
+
+htmlMini += `
+<p>
+
+${item.nombre}
+
+<br>
+
+${item.cantidad}
+${item.unidad}
+
+-
+
+$${item.subtotal.toFixed(2)}
+
+</p>
+`;
+
+});
+
+document
+.getElementById(
+  "miniCarritoContenido"
+)
+.innerHTML =
+htmlMini;
+
     document.getElementById(
 "contadorCarrito"
 ).textContent =
@@ -708,16 +738,21 @@ function obtenerGPS(){
         posicion.coords.longitude;
 
       document
-      .getElementById(
-        "gps"
-      )
-      .value =
-      lat + "," + lng;
+.getElementById(
+  "gps"
+)
+.value =
+"https://maps.google.com/?q="
++
+lat
++
+","
++
+lng;
 
-      alert(
-        "UBICACION COMPARTIDA"
-      );
-
+   alert(    
+  "UBICACION COMPARTIDA"
+  )
     },
 
     function(){
@@ -728,6 +763,263 @@ function obtenerGPS(){
 
     }
 
+  );
+
+}
+
+document
+.getElementById(
+  "carritoFlotante"
+)
+.addEventListener(
+  "click",
+  function(){
+
+    const mini =
+      document.getElementById(
+        "miniCarrito"
+      );
+
+    if(
+      mini.style.display
+      ===
+      "block"
+    ){
+
+      mini.style.display =
+        "none";
+
+    }else{
+
+      mini.style.display =
+        "block";
+
+    }
+
+  }
+);
+
+/*
+=================================
+ENVIAR PEDIDO
+=================================
+*/
+
+document
+.getElementById(
+  "formPedido"
+)
+.addEventListener(
+  "submit",
+  enviarPedido
+);
+
+async function enviarPedido(e){
+
+  e.preventDefault();
+
+  if(
+    carrito.length === 0
+  ){
+
+    alert(
+      "AGREGA PRODUCTOS AL CARRITO"
+    );
+
+    return;
+
+  }
+
+  const total =
+    document
+    .getElementById(
+      "total"
+    )
+    .textContent
+    .replace("$","");
+
+  const pedido = {
+
+    cliente:
+      document
+      .getElementById(
+        "clienteNombre"
+      )
+      .value
+      .toUpperCase(),
+
+    telefono:
+      document
+      .getElementById(
+        "clienteTelefono"
+      )
+      .value,
+
+    direccion:
+      document
+      .getElementById(
+        "clienteDireccion"
+      )
+      .value
+      .toUpperCase(),
+
+    gps:
+      document
+      .getElementById(
+        "gps"
+      )
+      .value,
+
+    total:
+      total,
+
+    tipo:
+      "TIENDA WEB",
+
+    formaPago:
+      document
+      .getElementById(
+        "formaPago"
+      )
+      .value,
+
+    productos:
+      carrito.map(item=>({
+
+        nombre:
+          item.nombre,
+
+        cantidad:
+          item.cantidad,
+
+        precioUnitario:
+          item.precio,
+
+        subtotal:
+          item.subtotal
+
+      }))
+
+  };
+
+  try{
+
+    const respuesta =
+      await fetch(
+        API,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+            "application/json"
+          },
+
+          body:
+          JSON.stringify(
+            pedido
+          )
+        }
+      );
+
+    const resultado =
+      await respuesta.json();
+
+    if(
+      resultado.success
+    ){
+
+      pedidoWhatsApp(
+        resultado.folio
+      );
+
+    }else{
+
+      alert(
+        "ERROR AL GUARDAR"
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+    alert(
+      "ERROR DE CONEXION"
+    );
+
+  }
+
+}
+
+/*
+=================================
+WHATSAPP
+=================================
+*/
+
+function pedidoWhatsApp(
+  folio
+){
+
+  let mensaje =
+
+`*NUEVO PEDIDO BIAXAL*
+
+FOLIO:
+${folio}
+
+`;
+
+  carrito.forEach(item=>{
+
+    mensaje +=
+
+`${item.nombre}
+${item.cantidad} ${item.unidad}
+
+`;
+
+  });
+
+  mensaje +=
+
+`
+TOTAL:
+${document.getElementById("total").textContent}
+
+CLIENTE:
+${document.getElementById("clienteNombre").value}
+
+TELEFONO:
+${document.getElementById("clienteTelefono").value}
+
+DIRECCION:
+${document.getElementById("clienteDireccion").value}
+
+GPS:
+${document.getElementById("gps").value}
+`;
+
+  window.open(
+
+    "https://wa.me/525514020332?text="
+
+    +
+
+    encodeURIComponent(
+      mensaje
+    ),
+
+    "_blank"
+
+  );
+
+  alert(
+    "PEDIDO ENVIADO"
   );
 
 }
