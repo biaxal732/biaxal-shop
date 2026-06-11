@@ -252,7 +252,7 @@ const subcategoria =
 
 });
 
-    }
+}
 
 
 /*
@@ -477,6 +477,11 @@ function actualizarCarrito(){
     "$" +
     total.toFixed(2);
 
+    document.getElementById(
+"contadorCarrito"
+).textContent =
+carrito.length;
+
 }
 
 /*
@@ -664,3 +669,66 @@ document
 
     }
   );
+
+  /*
+=================================
+GPS
+=================================
+*/
+
+document
+.getElementById(
+  "btnGPS"
+)
+.addEventListener(
+  "click",
+  obtenerGPS
+);
+
+function obtenerGPS(){
+
+  if(
+    !navigator.geolocation
+  ){
+    alert(
+      "GPS NO DISPONIBLE"
+    );
+    return;
+  }
+
+  navigator.geolocation
+  .getCurrentPosition(
+
+    function(posicion){
+
+      const lat =
+        posicion.coords.latitude;
+
+      const lng =
+        posicion.coords.longitude;
+
+      document
+      .getElementById(
+        "gps"
+      )
+      .value =
+      lat + "," + lng;
+
+      alert(
+        "UBICACION COMPARTIDA"
+      );
+
+    },
+
+    function(){
+
+      alert(
+        "NO SE PUDO OBTENER GPS"
+      );
+
+    }
+
+  );
+
+}
+
