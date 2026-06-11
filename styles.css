@@ -687,3 +687,39 @@ cursor:pointer;
 
 }
 
+#miniCarrito table{
+
+width:100%;
+
+border-collapse:collapse;
+
+font-size:13px;
+
+}
+
+#miniCarrito th{
+
+background:#003D99;
+
+color:white;
+
+padding:8px;
+
+}
+
+#miniCarrito td{
+
+padding:8px;
+
+border-bottom:1px solid #ddd;
+
+}
+
+#miniCarrito tr:last-child{
+
+font-weight:bold;
+
+font-size:15px;
+
+}
+

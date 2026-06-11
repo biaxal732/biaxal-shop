@@ -477,7 +477,68 @@ function actualizarCarrito(){
     "$" +
     total.toFixed(2);
 
-   let htmlMini = "";
+   let htmlMini = `
+
+<table style="
+width:100%;
+border-collapse:collapse;
+font-size:14px;
+">
+
+<tr>
+<th>PRODUCTO</th>
+<th>CANT.</th>
+<th>SUBTOTAL</th>
+</tr>
+`;
+
+carrito.forEach(item=>{
+
+htmlMini += `
+<tr>
+
+<td>${item.nombre}</td>
+
+<td style="text-align:center">
+${item.cantidad}
+</td>
+
+<td style="text-align:right">
+$${item.subtotal.toFixed(2)}
+</td>
+
+</tr>
+`;
+
+});
+
+htmlMini += `
+
+<tr>
+
+<td colspan="2">
+<b>TOTAL</b>
+</td>
+
+<td style="text-align:right">
+
+<b>
+${totalHTML.textContent}
+</b>
+
+</td>
+
+</tr>
+
+</table>
+`;
+
+document
+.getElementById(
+"miniCarritoContenido"
+)
+.innerHTML =
+htmlMini;
 
 carrito.forEach(item=>{
 
@@ -767,37 +828,33 @@ lng;
 
 }
 
+let carritoAbierto =
+false;
+
 document
 .getElementById(
-  "carritoFlotante"
+"carritoFlotante"
 )
 .addEventListener(
-  "click",
-  function(){
+"click",
+function(){
 
-    const mini =
-      document.getElementById(
-        "miniCarrito"
-      );
-
-    if(
-      mini.style.display
-      ===
-      "block"
-    ){
-
-      mini.style.display =
-        "none";
-
-    }else{
-
-      mini.style.display =
-        "block";
-
-    }
-
-  }
+const mini =
+document.getElementById(
+"miniCarrito"
 );
+
+carritoAbierto =
+!carritoAbierto;
+
+mini.style.display =
+carritoAbierto
+?
+"block"
+:
+"none";
+
+});
 
 /*
 =================================
@@ -905,22 +962,17 @@ async function enviarPedido(e){
   try{
 
     const respuesta =
-      await fetch(
-        API,
-        {
-          method:"POST",
+await fetch(
+  API,
+  {
+    method:"POST",
 
-          headers:{
-            "Content-Type":
-            "application/json"
-          },
-
-          body:
-          JSON.stringify(
-            pedido
-          )
-        }
-      );
+    body:
+    JSON.stringify(
+      pedido
+    )
+  }
+);
 
     const resultado =
       await respuesta.json();
@@ -1023,4 +1075,22 @@ ${document.getElementById("gps").value}
   );
 
 }
+
+document
+.getElementById(
+"btnMapa"
+)
+.addEventListener(
+"click",
+function(){
+
+window.open(
+
+"https://www.google.com/maps",
+
+"_blank"
+
+);
+
+});
 
