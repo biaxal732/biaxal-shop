@@ -723,3 +723,29 @@ font-size:15px;
 
 }
 
+#mapaEntrega{
+
+width:100%;
+
+height:350px;
+
+margin-top:15px;
+
+border-radius:15px;
+
+display:none;
+
+border:2px solid #003D99;
+
+}
+
+#ubicacionSeleccionada{
+
+margin-top:10px;
+
+font-weight:bold;
+
+color:#003D99;
+
+}
+

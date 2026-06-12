@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 
 <html lang="es">
+
 <head>
+
+	<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"
+/>
+
+<script
+src="https://unpkg.com/leaflet/dist/leaflet.js">
+</script>
+
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -288,11 +300,25 @@ id="btnMapa">
 
 </button>
 
-<input
-type="hidden"
-id="gps"
+<div
+id="mapaEntrega"
+style="
+display:none;
+height:350px;
+margin-top:10px;
+border-radius:15px;
+overflow:hidden;
+">
+</div>
 
->
+<div
+id="ubicacionSeleccionada"
+style="
+margin-top:10px;
+font-weight:bold;
+color:green;
+">
+</div>
 
 <select id="formaPago">
 

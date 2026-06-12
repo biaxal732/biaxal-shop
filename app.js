@@ -1,5 +1,5 @@
 const API =
-"https://script.google.com/macros/s/AKfycbyKa8r4iaC_WybrevWGP2yot00BG6xnB3d8TOJRIbDwS6BbAPybuzeyQlUZr_KgP8LZ/exec";
+"https://script.google.com/macros/s/AKfycbx_6n0PRVL6ELrLinI1vaws3WRnn1D0g2IwtN5lgDJoGaEA5C9VW9jMUKBeRW6Fbdky/exec";
 
 let productos = [];
 let lineas = [];
@@ -540,26 +540,12 @@ document
 .innerHTML =
 htmlMini;
 
-carrito.forEach(item=>{
-
-htmlMini += `
-<p>
-
-${item.nombre}
-
-<br>
-
-${item.cantidad}
-${item.unidad}
-
--
-
-$${item.subtotal.toFixed(2)}
-
-</p>
-`;
-
-});
+document
+.getElementById(
+"miniCarritoContenido"
+)
+.innerHTML =
+htmlMini;
 
 document
 .getElementById(
@@ -767,14 +753,13 @@ GPS
 =================================
 */
 
-document
-.getElementById(
-  "btnGPS"
-)
-.addEventListener(
-  "click",
-  obtenerGPS
-);
+const btnMapa =
+document.getElementById("btnMapa");
+
+if(btnMapa){
+
+
+}
 
 function obtenerGPS(){
 
@@ -1091,6 +1076,80 @@ window.open(
 "_blank"
 
 );
+
+});
+
+let mapa;
+let marcador;
+
+document
+.getElementById("btnMapa")
+.addEventListener("click",()=>{
+
+document
+.getElementById("mapaEntrega")
+.style.display="block";
+
+if(mapa) return;
+
+mapa=L.map("mapaEntrega")
+.setView([19.4326,-99.1332],13);
+
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+).addTo(mapa);
+
+mapa.on("click",(e)=>{
+
+if(marcador){
+mapa.removeLayer(marcador);
+}
+
+marcador=L.marker(e.latlng)
+.addTo(mapa);
+
+document
+.getElementById("gps")
+.value=
+e.latlng.lat+
+","+
+e.latlng.lng;
+
+document
+.getElementById(
+"ubicacionSeleccionada"
+).innerHTML=
+"Ubicación seleccionada ✓";
+
+});
+
+});
+
+const carritoBtn =
+document.getElementById(
+"carritoFlotante"
+);
+
+const miniCarrito =
+document.getElementById(
+"miniCarrito"
+);
+
+carritoBtn.addEventListener(
+"click",
+()=>{
+
+if(
+miniCarrito.style.display==="block"
+){
+
+miniCarrito.style.display="none";
+
+}else{
+
+miniCarrito.style.display="block";
+
+}
 
 });
 
